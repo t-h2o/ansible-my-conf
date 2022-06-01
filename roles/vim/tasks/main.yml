@@ -1,0 +1,6 @@
+---
+- name: Install the last version of vim
+  pacman:
+    name=vim
+    state=latest
+...
