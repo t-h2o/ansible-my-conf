@@ -1,0 +1,28 @@
+---
+# Kitty
+- name: Install the last version of kitty
+  become: yes
+  ansible.builtin.package:
+    name: "kitty"
+    state: latest
+
+# Copy the theme
+- name: Copy the theme
+  become: yes
+  ansible.builtin.copy:
+    src: "theme.conf"
+    dest: "/home/{{ user.name }}/.config/kitty/theme.conf"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0644"
+
+# Copy the configuration
+- name: Copy the configuration
+  become: yes
+  ansible.builtin.template:
+    src: "kitty.conf.j2"
+    dest: "/home/{{ user.name }}/.config/kitty/kitty.conf"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0644"
+...

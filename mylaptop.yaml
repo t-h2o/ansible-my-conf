@@ -1,0 +1,10 @@
+---
+- hosts: mylaptops
+  roles:
+    - role: "i3"
+    - role: "omz"
+    - role: "fonts"
+    - role: "vim"
+    - role: "misc"
+    - role: "kitty"
+...

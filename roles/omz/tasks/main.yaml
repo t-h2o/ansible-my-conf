@@ -1,0 +1,50 @@
+---
+# tasks file for omz
+
+- name: Install the last version of zsh
+  become: yes
+  ansible.builtin.package:
+    name: "zsh"
+    state: latest
+
+- name: Get stats of oh-my-zsh folder 
+  become: yes
+  ansible.builtin.stat:
+    path: "/home/{{ user.name }}/.oh-my-zsh"
+  register: p
+
+- name: Clone the repo if it doesn't exist
+  become: yes
+  ansible.builtin.git:
+    repo: 'https://github.com/ohmyzsh/ohmyzsh'
+    dest: "/home/{{ user.name }}/.oh-my-zsh"
+  when: p.stat.exists == 0
+
+- name: Change file ownership, group and permissions
+  become: yes
+  ansible.builtin.file:
+    path: "/home/{{ user.name }}/.oh-my-zsh"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: '0755'
+
+- name: Add a line to zshrc if the file does not exist, without passing regexp
+  become: yes
+  ansible.builtin.blockinfile:
+    marker_begin: OMZ
+    marker_end: OMZ END
+    path: "/home/{{ user.name }}/.zshrc"
+    block: |
+      export ZSH=$HOME/.oh-my-zsh
+      ZSH_THEME="robbyrussell"
+      source $ZSH/oh-my-zsh.sh
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    create: yes
+
+- name: Add {{ user.name }} with zsh shell
+  become: yes
+  ansible.builtin.user:
+    name: "{{ user.name }}"
+    shell: /bin/zsh
+...

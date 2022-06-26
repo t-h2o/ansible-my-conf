@@ -1,0 +1,28 @@
+---
+- name: My first play
+  hosts: mylaptops
+  tasks:
+   - name: Ping my hosts
+     ansible.builtin.ping:
+   - name: Print message
+     ansible.builtin.debug:
+       msg:
+        - Hello world
+        - "My user: {{ user.name }}"
+        - "active kitty bell : {{ enable_audio_bell }}"
+   - name: Print all available facts
+     ansible.builtin.debug:
+       var: ansible_facts
+     when: no
+
+   - name: Get stats of the FS object
+     become: yes
+     ansible.builtin.stat:
+       path: "/home/{{ user.name }}/new/folder/to/create"
+     register: p
+
+   - name: Print a debug message
+     ansible.builtin.debug:
+       msg: "Path do not exist"
+     when: p.stat.exists == 0
+...

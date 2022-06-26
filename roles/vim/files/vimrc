@@ -1,0 +1,11 @@
+" File: ~/.vimrc
+
+" PLUG-IN
+  source $HOME/.config/vim/plug.vimrc
+  source $HOME/.config/vim/plug-config.vimrc
+
+" personnal information
+  source $HOME/.config/vim/personnal-info.vimrc
+
+" main settings
+  source $HOME/.config/vim/settings.vimrc

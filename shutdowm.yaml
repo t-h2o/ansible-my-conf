@@ -1,0 +1,9 @@
+---
+- name: All hosts up-to-date
+  hosts: mylaptops
+  become: yes
+  
+  tasks:
+    - name: This command will shutdown after 1 minute the computer
+      ansible.builtin.shell:
+        cmd: shutdown 1

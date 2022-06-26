@@ -1,0 +1,8 @@
+---
+# My laptops
+mylaptops:
+  hosts:
+    dell:
+      ansible_host: 42.42.42.42
+      ansible_user: devops
+...
