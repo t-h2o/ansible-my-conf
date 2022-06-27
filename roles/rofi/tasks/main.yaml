@@ -1,0 +1,26 @@
+---
+# tasks file for rofi
+
+- name: Install the last version of rofi
+  become: yes
+  ansible.builtin.package:
+    name: "rofi"
+    state: latest
+
+- name: Create a .config/rofi directory if it does not exist
+  become: yes
+  ansible.builtin.file:
+    path: "/home/{{ user.name }}/.config/rofi"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy the vimrc
+  become: yes
+  ansible.builtin.copy:
+    src: "config.rasi"
+    dest: "/home/{{ user.name }}/.config/rofi/"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0644"

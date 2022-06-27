@@ -1,0 +1,8 @@
+---
+# tasks file for ansible
+
+- name: Install the last version of vim
+  become: yes
+  ansible.builtin.package:
+    name: "ansible"
+    state: latest

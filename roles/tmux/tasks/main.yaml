@@ -1,0 +1,26 @@
+---
+# tasks file for tmux
+
+- name: Install the last version of tmux
+  become: yes
+  ansible.builtin.package:
+    name: "tmux"
+    state: latest
+
+- name: Create a .config/tmux directory if it does not exist
+  become: yes
+  ansible.builtin.file:
+    path: "/home/{{ user.name }}/.config/tmux"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy the tmux config
+  become: yes
+  ansible.builtin.copy:
+    src: "tmux.conf"
+    dest: "/home/{{ user.name }}/.config/tmux/"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0644"
