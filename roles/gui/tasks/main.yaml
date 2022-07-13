@@ -26,6 +26,14 @@
 - include_tasks: wallpaper.yaml
 - include_tasks: xinit.yaml
 
+- name: Copy the face
+  ansible.builtin.copy:
+    src: "face.png"
+    dest: "/home/{{ user.name }}/.face.png"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0644"
+
 - name: Enable service lightdm
   ansible.builtin.service:
     name: "lightdm.service"
