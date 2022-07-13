@@ -1,0 +1,21 @@
+---
+# tasks file for user
+- name: Copy the adduser.conf configuration
+  ansible.builtin.copy:
+    src: "adduser.conf"
+    dest: "/etc/adduser.conf"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+
+- name: Copy a new "sudoers" after passing validation with visudo
+  ansible.builtin.copy:
+    src: sudoers
+    dest: /etc/sudoers
+    owner: "root"
+    group: "root"
+    mode: "0644"
+    validate: /usr/sbin/visudo -csf %s
+
+- include_tasks: devops.yaml
+...
