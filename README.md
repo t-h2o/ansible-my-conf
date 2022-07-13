@@ -36,19 +36,47 @@ Deploy my [configuration](https://github.com/t-h2o/my-configuration) with ansibl
 
 ## Ansible tree
 
-You need to create the same tree
+An example of ansible tree:
 
 ```tree
 .
 ├── group_vars
-│   └── mylaptops
+│   └── all
 ├── host_vars
-│   └── 42.42.42.42
+│   └── laptop
 ├── roles
 │   └── vim
 ├── playbook.yaml
 └── hosts
 ```
+
+### Hosts file
+
+An example of a hosts file:
+
+```yaml
+---
+# My laptops
+mylaptops:
+  hosts:
+    laptop:
+      ansible_host: 42.42.42.42
+      ansible_user: devops
+      ansible_ssh_port: 42
+    desktop:
+```
+
+You can set the domain name/IP address, the user with ansible can login, the ssh port and etc...
+
+### My roles
+
+#### grub
+
+Set music and font for grub
+
+#### gui
+
+Set up a GUI
 
 ## Resources
 
