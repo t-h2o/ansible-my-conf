@@ -1,0 +1,7 @@
+---
+- hosts: myservers
+  become: yes
+  roles:
+#   - role: "user"
+#   - role: "ssh"
+...

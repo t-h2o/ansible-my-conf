@@ -5,4 +5,11 @@ mylaptops:
     dell:
       ansible_host: 42.42.42.42
       ansible_user: devops
+
+# My servers
+myservers:
+  hosts:
+    home:
+      ansible_host: 42.42.42.42
+      ansible_user: devops
 ...

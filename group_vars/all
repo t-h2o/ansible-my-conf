@@ -1,7 +1,14 @@
 ---
+devops:
+  - user:
+    name: user
+    ssh_keys: https://github.com/user.keys
+
+ssh:
+  port: 22
+
 user:
   name: "user"
   user42: "user42"
   mail42: "user42@42lausanne.ch"
-enable_audio_bell: "no"
 ...
