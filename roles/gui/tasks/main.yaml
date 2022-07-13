@@ -1,0 +1,86 @@
+---
+# tasks file for gui
+- name: Install GUI packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: latest
+  loop:
+    - "papirus-icon-theme"
+    - "brightnessctl"
+    - "xclip"
+    - "hsetroot"
+    - "rofi"
+    - "maim"
+    - "xorg"
+    - "xorg-xinit"
+    - "xorg-server"
+    - "i3-wm"
+    - "i3lock"
+    - "i3status"
+    - "dmenu" 
+    - "lightdm"
+    - "lightdm-gtk-greeter"
+
+- name: Copy the xinitrc
+  ansible.builtin.copy:
+    src: "xinitrc"
+    dest: "/home/{{ user.name }}/.xinitrc"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0644"
+
+- name: Create a /home/{{ user.name }}/.config/i3 directory if it does not exist
+  ansible.builtin.file:
+    path: "/home/{{ user.name }}/.config/i3"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy the i3 config
+  ansible.builtin.copy:
+    src: "config"
+    dest: "/home/{{ user.name }}/.config/i3/config"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0644"
+
+- name: Create a /home/{{ user.name }}/Pictures directory if it does not exist
+  ansible.builtin.file:
+    path: "/home/{{ user.name }}/Pictures"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy the wallpaper
+  ansible.builtin.copy:
+    src: "wallpaper.png"
+    dest: "/home/{{ user.name }}/Pictures/wallpaper.png"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0644"
+
+- name: Create a .config/rofi directory if it does not exist
+  ansible.builtin.file:
+    path: "/home/{{ user.name }}/.config/rofi"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy the configuration of rofi
+  ansible.builtin.copy:
+    src: "config.rasi"
+    dest: "/home/{{ user.name }}/.config/rofi/"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0644"
+
+- name: Enable service lightdm
+  ansible.builtin.service:
+    name: "lightdm.service"
+    state: started
+    enabled: yes
+  when: yes
+...
