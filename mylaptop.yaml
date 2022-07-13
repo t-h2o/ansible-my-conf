@@ -1,10 +1,19 @@
 ---
+# replace ('#') with a space (' ')
 - hosts: mylaptops
+  become: yes
   roles:
-    - role: "i3"
-    - role: "omz"
-    - role: "fonts"
-    - role: "vim"
-    - role: "misc"
-    - role: "kitty"
-...
+#   - role: "ansible"
+#   - role: "bot"
+#   - role: "fonts"
+#   - role: "grub"
+#   - role: "gui"
+#   - role: "i3"
+#   - role: "kitty"
+#   - role: "misc"
+#   - role: "omz"
+#   - role: "rofi"
+#   - role: "ssh"
+#   - role: "tmux"
+#   - role: "user"
+#   - role: "vim"
