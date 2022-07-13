@@ -1,0 +1,29 @@
+---
+# tasks file for ssh
+- name: Install the last version of openssh
+  ansible.builtin.package:
+    name: "openssh"
+    state: latest
+
+- name: Copy the sshd configuration
+  ansible.builtin.template:
+    src: "sshd_config.j2"
+    dest: "/etc/ssh/sshd_config"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+
+- name: Set authorized keys taken from url
+  ansible.posix.authorized_key:
+    user: devops
+    state: present
+    key: "{{ item.ssh_keys }}"
+  with_items: "{{ devops }}"
+
+- name: Reload service ssh
+  ansible.builtin.service:
+    name: "sshd"
+    enabled: yes
+    state: restarted
+  when: yes
+...
