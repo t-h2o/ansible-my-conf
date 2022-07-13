@@ -1,14 +1,20 @@
 ---
 # Kitty
 - name: Install the last version of kitty
-  become: yes
   ansible.builtin.package:
     name: "kitty"
     state: latest
 
+- name: Create a .config/kitty directory if it does not exist
+  ansible.builtin.file:
+    path: "/home/{{ user.name }}/.config/kitty"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    state: directory
+    mode: '0755'
+
 # Copy the theme
 - name: Copy the theme
-  become: yes
   ansible.builtin.copy:
     src: "theme.conf"
     dest: "/home/{{ user.name }}/.config/kitty/theme.conf"
@@ -18,7 +24,6 @@
 
 # Copy the configuration
 - name: Copy the configuration
-  become: yes
   ansible.builtin.template:
     src: "kitty.conf.j2"
     dest: "/home/{{ user.name }}/.config/kitty/kitty.conf"

@@ -1,7 +1,6 @@
 ---
 # tasks file for misc
 - name: Install a few program
-  become: yes
   ansible.builtin.package:
     name: "{{ item }}"
     state: latest

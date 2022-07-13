@@ -2,7 +2,6 @@
 # tasks file for fonts
 
 - name: Install the fonts
-  become: yes
   ansible.builtin.package:
     name: "{{ item }}"
     state: latest
@@ -11,7 +10,6 @@
     - ttf-jetbrains-mono
 
 - name: Copy vconsole.conf in /etc/
-  become: yes
   ansible.builtin.copy:
     src: "vconsole.conf"
     dest: "/etc/"
