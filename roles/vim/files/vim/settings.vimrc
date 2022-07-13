@@ -6,6 +6,7 @@ set incsearch ignorecase smartcase hlsearch
 set wildmode=longest,list,full wildmenu
 set ruler laststatus=2 showcmd showmode
 set listchars=trail:»,tab:»-
+set linebreak
 
 syntax on
 set fillchars+=vert:\ 
