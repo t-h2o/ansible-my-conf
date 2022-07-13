@@ -1,0 +1,17 @@
+---
+- name: Create a /home/{{ user.name }}/Pictures directory if it does not exist
+  ansible.builtin.file:
+    path: "/home/{{ user.name }}/Pictures"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy the wallpaper
+  ansible.builtin.copy:
+    src: "wallpaper.png"
+    dest: "/home/{{ user.name }}/Pictures/wallpaper.png"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0644"
+...

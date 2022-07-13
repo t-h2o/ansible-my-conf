@@ -1,0 +1,9 @@
+---
+- name: Copy the xinitrc
+  ansible.builtin.copy:
+    src: "xinitrc"
+    dest: "/home/{{ user.name }}/.xinitrc"
+    owner: "{{ user.name }}"
+    group: "{{ user.name }}"
+    mode: "0644"
+...
