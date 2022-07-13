@@ -53,3 +53,4 @@ You need to create the same tree
 ## Resources
 
 * [User guide](https://docs.ansible.com/ansible/latest/user_guide/index.html)
+* [Ansible builtin](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/index.html)
