@@ -25,19 +25,5 @@
 - include_tasks: rofi.yaml
 - include_tasks: wallpaper.yaml
 - include_tasks: xinit.yaml
-
-- name: Copy the face
-  ansible.builtin.copy:
-    src: "face.png"
-    dest: "/home/{{ user.name }}/.face.png"
-    owner: "{{ user.name }}"
-    group: "{{ user.name }}"
-    mode: "0644"
-
-- name: Enable service lightdm
-  ansible.builtin.service:
-    name: "lightdm.service"
-    state: started
-    enabled: yes
-  when: yes
+- include_tasks: lightdm.yaml
 ...

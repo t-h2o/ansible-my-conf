@@ -1,0 +1,32 @@
+---
+- name: Copy the avatar
+  ansible.builtin.copy:
+    src: "face.png"
+    dest: "/usr/share/pixmaps/face.png"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+
+- name: Copy the wallpaper
+  ansible.builtin.copy:
+    src: "wallpaper.png"
+    dest: "/usr/share/pixmaps/wallpaper.png"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+
+- name: Copy the configuration file
+  ansible.builtin.copy:
+    src: "lightdm-gtk-greeter.conf"
+    dest: "/etc/lightdm/lightdm-gtk-greeter.conf"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+
+- name: Enable service lightdm
+  ansible.builtin.service:
+    name: "lightdm.service"
+    state: started
+    enabled: yes
+  when: yes
+...
